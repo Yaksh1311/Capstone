@@ -1,29 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 #include "DateDBO.hpp"
-
-
-class Task{
-    public:
-        int taskID = 1, imp_level, frequency, repeat;
-        string task, description, status;
-        Date deadLine;
-        Task(){
-            taskID++;
-            status = 'Pending';
-            repeat = 0;
-            frequency = 0;
-        }
-        Task(string name, string desc, Date deadline, string stat, int implevel, int freq, int rep){
-            task = name;
-            description = desc;
-            imp_level = implevel;
-            deadLine = deadline;
-            frequency = freq;
-            repeat = rep;
-            status = stat;
-        }
-};
+#include "TaskDBO.hpp"
 
 void addTask(string username){
     string task, description, status;
@@ -108,7 +86,7 @@ void deleteTask(string username){
     rename("tasksnew.csv", "tasks.csv");
 }
 
-void editFile(int x,string username){
+void editTask(int x,string username){
     int count = 0, id;
     cout << "Enter Task ID of the task to be edited:\n";
     cin >> id;
@@ -173,26 +151,26 @@ void edit(string &username){
     cin>>index;
     switch(index+1){
         case 2:
-            editFile(2,username);
+            editTask(2,username);
             break;
         case 3:
-            editFile(3,username);
+            editTask(3,username);
             break;
         case 4:
-            editFile(4,username);
+            editTask(4,username);
             break;
         case 5:
-            editFile(5,username);
+            editTask(5,username);
             break;
         case 6:
-            editFile(6,username);
+            editTask(6,username);
             break;
         case 7:
-            editFile(7,username);
+            editTask(7,username);
         default:
             cout<<"Wrong choice. Please enter again"<<endl;
             edit(username); 
-            break;   
+            break;
     }
 }
 
@@ -216,6 +194,19 @@ void completeTask(string username){
             stringstream update;
             update << "Completed";
             r[8] = update.str();
+            if(stoi(r[7]) != 0){
+                int rep = stoi(r[7])-1;
+                stringstream c;
+                c << rep;
+                r[7] = c.str();
+                vector<string> date = split(r[4], ',');
+                int day = stoi(date[0]);
+                int month = stoi(date[1]);
+                int year = stoi(date[2]);
+                Date d(day, month, year);
+                int n = stoi(r[7]);
+                d.dateAdd(n);
+            }
             if(!fin.eof()){
                 for(int i = 0; i < 8; i++){
                     fout << r[i] << ",";

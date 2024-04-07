@@ -80,3 +80,43 @@ int difference(Date date1, Date date2){
     int day2 = date2.daysSinceYearZero();
     return day2-day1;
 }
+
+string Date::dateAdd(int n){
+    Date result = Date(day, month, year); 
+
+    int totalDays = day + n;
+
+    while (true) {
+        static const int daysInMonth[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+
+        if (result.month == 2 && (isLeapYear(year))) {
+            if (totalDays > 29) {
+                totalDays -= 29;
+                result.month++;
+            } 
+            else {
+                result.day = totalDays;
+                break;
+            }
+        } 
+        else {
+            if (totalDays > daysInMonth[result.month - 1]) {
+                totalDays -= daysInMonth[result.month - 1];
+                result.month++;
+            } 
+            else {
+                result.day = totalDays;
+                break;
+            }
+        }
+
+        if (result.month > 12) {
+            result.month = 1;
+            result.year++;
+        }
+    }
+
+    result.year += (totalDays / 365);
+    string res= to_string(result.day)+"/"+to_string(result.month)+"/"+to_string(result.year);
+    return res;
+}

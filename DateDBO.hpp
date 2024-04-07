@@ -20,6 +20,7 @@ class Date{
         bool isValidDate();
         string displayDate();
         int daysSinceYearZero();
+        string dateAdd(int n);
         Date() : day(1), month(1), year(2024){}
         Date(int d, int m, int y) : day(d), month(m), year(y){}
 };
