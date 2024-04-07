@@ -119,7 +119,3 @@ void change_pass(string &username){
     remove("userlist.csv");
     rename("userlistnew.csv", "userlist.csv");
 }
-
-int main(){
-    return 0;
-}
