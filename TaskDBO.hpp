@@ -21,7 +21,7 @@ class Task{
         Date deadLine;
         Task(){
             taskID++;
-            status = 'Pending';
+            status = "Pending";
             repeat = 0;
             frequency = 0;
         }

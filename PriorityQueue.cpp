@@ -22,9 +22,9 @@ float priorityCalc(int diff, int imp){
 void PriorityQueue::pqEntry(string &username){
     time_t currentTime = time(nullptr);
     tm* localTime = localtime(&currentTime);
-    int year = localTime->tm_year + 1900;
-    int month = localTime->tm_mon + 1;     
-    int day = localTime->tm_mday;
+    auto year = localTime->tm_year + 1900;
+    auto month = localTime->tm_mon + 1;     
+    auto day = localTime->tm_mday;
     Date d1(day, month, year);
     ifstream fin("tasks.csv");
     vector<string> row;
