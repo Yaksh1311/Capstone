@@ -4,7 +4,6 @@
 #include "PriorityQueue.hpp"
 #include "UserlistDBO.hpp"
 
-using namespace std;
 
 void sleep(float seconds){
     clock_t startClock = clock();

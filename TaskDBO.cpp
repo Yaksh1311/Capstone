@@ -2,6 +2,9 @@
 using namespace std;
 #include "DateDBO.hpp"
 #include "TaskDBO.hpp"
+#include "TextTable.h"
+
+TextTable t('-', '|', '+' );
 
 void addTask(string username){
     string task, description, status;
@@ -207,6 +210,84 @@ void completeTask(string username){
                 int n = stoi(r[7]);
                 d.dateAdd(n);
             }
+            if(!fin.eof()){
+                for(int i = 0; i < 8; i++){
+                    fout << r[i] << ",";
+                }
+                fout << r[8] << "\n";
+            }
+        }
+        else{
+            if(!fin.eof()){
+                for(int i = 0; i < 8; i++){
+                    fout << r[i] << ",";
+                }
+                fout << r[8] << "\n";
+            }
+        }
+        if(fin.eof()){
+            break;
+        }
+    }
+    fin.close();
+    fout.close();
+
+    remove("tasks.csv");
+    rename("tasksnew.csv", "tasks.csv");
+}
+
+void displayTask(string username){
+    fstream fin;
+    fin.open("tasks.csv", ios::in);
+    vector<string> r;
+    string line,word;
+    t.add("TaskID");
+    t.add("Task");
+    t.add("Description");
+    t.add("Deadline");
+    t.add("ImpLevel");
+    t.add("Day Cycle Frequency");
+    t.add("Frequency of Repeatation");
+    t.add("Status");
+    t.endOfRow();
+    while(!fin.eof()){ 
+        r.clear();
+        getline(fin, line);
+        stringstream s(line);
+        while( getline(s, word, ',')){
+            r.push_back(word);
+        }
+        if(r[0] == username){
+            t.add(r[1]);
+            t.add(r[2]);
+            t.add(r[3]);
+            t.add(r[4]);
+            t.add(r[5]);
+            t.add(r[6]);
+            t.add(r[7]);
+            t.add(r[8]);
+            t.endOfRow();
+        }
+    }
+}
+
+void missingTask(string username){
+    fstream fin,fout;
+    fin.open("tasks.csv", ios::in);
+    fout.open("tasksnew.csv", ios::out);
+    vector<string> r;
+    string line,word;
+    while(!fin.eof()){ 
+        r.clear();
+        getline(fin, line);
+        stringstream s(line);
+        while( getline(s, word, ',')){
+            r.push_back(word);
+        }
+        if(r[0] == username){
+            stringstream update;
+            update << "Missed";
+            r[8] = update.str();
             if(!fin.eof()){
                 for(int i = 0; i < 8; i++){
                     fout << r[i] << ",";
