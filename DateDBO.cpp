@@ -26,6 +26,7 @@ int daysInMonth(int m, int y){
     return days;
 }
 
+
 Date Date::inputDate(){        
     cout << "Enter Date in DD/MM/YYYY format:\n";
     string date;
@@ -52,4 +53,30 @@ string Date::displayDate(){
     string date;
     date = to_string(day) + '/' + to_string(month) + '/' + to_string(year);
     return date;
+}
+
+int Date::daysSinceYearZero() {
+    int days = 0;
+    for (int y = 2024; y < year; ++y) {
+        bool isLeapYear = (y % 4 == 0 && y % 100 != 0) || (y % 400 == 0);
+        if(isLeapYear){
+            days+=366;            
+        }
+        else days+=365;
+    }
+    for (int m = 1; m < month; ++m) {
+        static const int daysInMonth[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};            
+        days += daysInMonth[m - 1];
+        if (m == 2 && (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0)) {
+            days += 1;
+        }
+    }  
+    days += day - 1;
+    return days;
+}
+
+int difference(Date date1, Date date2){
+    int day1 = date1.daysSinceYearZero();
+    int day2 = date2.daysSinceYearZero();
+    return day2-day1;
 }
