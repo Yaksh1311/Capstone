@@ -11,15 +11,6 @@ void sleep(float seconds){
     while(clock() < startClock+secondsAhead);
     return;
 }
-void clear(){
-    #if defined _WIN32
-        system("cls");
-    #elif defined (__LINUX__) || defined(__gnu_linux__) || defined(__linux__)
-        system("clear");
-    #elif defined (__APPLE__)
-        system("clear");
-    #endif
-}
 
 void Center_allign(string& text, int width) {
     int left_padding = (width - text.length()) / 2;
@@ -27,7 +18,6 @@ void Center_allign(string& text, int width) {
 }
 
 void menu(string Username){
-    clear();
     int choice;
     int x = 1;
     PriorityQueue pq;
@@ -49,31 +39,25 @@ void menu(string Username){
         cin>>choice;
         switch(choice){
             case 1:
-                clear();
                 addTask(Username);
                 break;
 
             case 2:
-                clear();
                 deleteTask(Username);
                 break;
 
             case 3:
-                clear();
                 edit(Username);
                 break;
 
             case 4:
-                clear();
                 completeTask(Username);
                 break;
 
             case 5:
-                clear();
                 change_pass(Username);
                 break;
             case 6:
-                clear();
                 x--;
                 break;
             default:
@@ -84,12 +68,12 @@ void menu(string Username){
 }
 
 int main(){
-    cout << "Welcome to Task Scheduler and Reminder";
+    cout << "Welcome to Task Scheduler and Reminder\n";
     sleep(1.0);
     while(true){
         cout << "1. Sign Up\n";
         cout << "2. Login\n";
-        cout << "3. Exit.";
+        cout << "3. Exit.\n";
         int c;
         cout << "Enter your choice:\n";
         cin >> c;
@@ -98,12 +82,14 @@ int main(){
             cout << "Enter your username:\n";
             cin >> username;
             signup(username);
+            menu(username);
         }
         else if(c == 2){
             string username;
             cout << "Enter your username:\n";
             cin >> username;
             login(username);
+            menu(username);
         }
         else if(c == 3){
             cout << "Thank You.\n";

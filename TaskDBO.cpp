@@ -4,7 +4,7 @@ using namespace std;
 #include "TaskDBO.hpp"
 #include "TextTable.h"
 
-TextTable t('-', '|', '+' );
+TextTable table('-', '|', '+' );
 
 void addTask(string username){
     string task, description, status;
@@ -241,15 +241,15 @@ void displayTask(string username){
     fin.open("tasks.csv", ios::in);
     vector<string> r;
     string line,word;
-    t.add("TaskID");
-    t.add("Task");
-    t.add("Description");
-    t.add("Deadline");
-    t.add("ImpLevel");
-    t.add("Day Cycle Frequency");
-    t.add("Frequency of Repeatation");
-    t.add("Status");
-    t.endOfRow();
+    table.add("TaskID");
+    table.add("Task");
+    table.add("Description");
+    table.add("Deadline");
+    table.add("ImpLevel");
+    table.add("Day Cycle Frequency");
+    table.add("Frequency of Repeatation");
+    table.add("Status");
+    table.endOfRow();
     while(!fin.eof()){ 
         r.clear();
         getline(fin, line);
@@ -258,15 +258,15 @@ void displayTask(string username){
             r.push_back(word);
         }
         if(r[0] == username){
-            t.add(r[1]);
-            t.add(r[2]);
-            t.add(r[3]);
-            t.add(r[4]);
-            t.add(r[5]);
-            t.add(r[6]);
-            t.add(r[7]);
-            t.add(r[8]);
-            t.endOfRow();
+            table.add(r[1]);
+            table.add(r[2]);
+            table.add(r[3]);
+            table.add(r[4]);
+            table.add(r[5]);
+            table.add(r[6]);
+            table.add(r[7]);
+            table.add(r[8]);
+            table.endOfRow();
         }
     }
 }

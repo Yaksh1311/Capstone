@@ -55,7 +55,7 @@ void login(std::string username){
         }
     }
     if(count = 0){
-        std::cout << "Username does not exist. Please login.\n";
+        std::cout << "Username does not exist. Please signup.\n";
         signup(username);
     }
     fin.close();
