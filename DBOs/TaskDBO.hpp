@@ -8,24 +8,24 @@ void addTask(string username);
 
 void deleteTask(string username);
 
-void editTask(int x,string username);
-
-void edit(string &username);
+void editRecord(string username, int x);
 
 void completeTask(string username);
 
+void displayTask(string username);
+
 class Task{
     public:
-        int taskID = 1, imp_level, frequency, repeat;
+        int taskID, imp_level, frequency, repeat;
         string task, description, status;
-        Date deadLine;
+        string deadLine;
         Task(){
-            taskID++;
             status = "Pending";
             repeat = 0;
             frequency = 0;
         }
-        Task(string name, string desc, Date deadline, string stat, int implevel, int freq, int rep){
+        Task(int id, string name, string desc, string deadline, string stat, int implevel, int freq, int rep){
+            taskID = id;
             task = name;
             description = desc;
             imp_level = implevel;

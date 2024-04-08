@@ -28,7 +28,7 @@ int daysInMonth(int m, int y){
 
 
 Date Date::inputDate(){        
-    cout << "Enter Date in DD/MM/YYYY format:\n";
+    cout << "Enter Deadline in DD/MM/YYYY format:\n";
     string date;
     cin >> date;
     vector<string> dateElements = split(date, '/');

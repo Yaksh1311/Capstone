@@ -1,6 +1,5 @@
 #include <bits/stdc++.h>
 #include "DateDBO.hpp"
-#include "TextTable.h"
 
 using namespace std;
 
@@ -13,10 +12,11 @@ public:
     int taskid;
 
     Node *nextNode;
-    Node(int id)
+    Node(float p, int id)
     {
+        priority = p;
         taskid=id;
-        nextNode = nullptr;
+        nextNode = NULL;
     }
 };
 
@@ -27,7 +27,7 @@ class PriorityQueue{
             frontNode = nullptr;
         }
         bool isEmpty();
-        void enqueue(int p, int tid);
-        void pqEntry(string &username);
-        void displayQueue();
+        void enqueue(float p, int tid);
+        void pqEntry(string username);
+        void displayQueue(string username);
 };

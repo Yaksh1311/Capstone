@@ -1,9 +1,8 @@
 #include <bits/stdc++.h>
-#include "DateDBO.hpp"
-#include "TaskDBO.hpp"
-#include "PriorityQueue.hpp"
-#include "UserlistDBO.hpp"
-
+#include "DBOs/DateDBO.hpp"
+#include "DBOs/TaskDBO.hpp"
+#include "DBOs/PriorityQueue.hpp"
+#include "DBOs/UserlistDBO.hpp"
 
 void sleep(float seconds){
     clock_t startClock = clock();
@@ -21,79 +20,87 @@ void menu(string Username){
     int choice;
     int x = 1;
     PriorityQueue pq;
-    while(x){
-        pq.pqEntry(Username);
-        pq.displayQueue();
+    while(true){
         sleep(1.5);
         string text = "Main Menu";
         int console_width = 90; 
         Center_allign(text, console_width);
 
-        cout<<"1. Add Task"<<endl;
-        cout<<"2. Delete Task"<<endl;
-        cout<<"3. Edit Task"<<endl;
-        cout<<"4. Complete Task"<<endl;
-        cout<<"5. Change your password."<<endl;
-        cout<<"6. Exit."<<endl;
-        cout<<"Enter your choice : ";
+        cout<<"1. Add Task\n";
+        cout<<"2. Delete Task\n";
+        cout<<"3. Edit Task\n";
+        cout<<"4. Complete Task\n";
+        cout<<"5. Display Tasks\n";
+        cout<<"6. Change your password.\n";
+        cout<<"7. Exit.\n";
+        cout<<"Enter your choice: ";
         cin>>choice;
-        switch(choice){
-            case 1:
-                addTask(Username);
-                break;
 
-            case 2:
-                deleteTask(Username);
-                break;
-
-            case 3:
-                edit(Username);
-                break;
-
-            case 4:
-                completeTask(Username);
-                break;
-
-            case 5:
-                change_pass(Username);
-                break;
-            case 6:
-                x--;
-                break;
-            default:
-                cout<<"You have entered a wrong choice."<<endl;
-                break;
+        if(choice == 1){
+            addTask(Username);
         }
-   }    
+        else if(choice == 2){
+            deleteTask(Username);
+        }
+        else if(choice == 3){
+            int id;
+            cout << "Enter Task ID of the task to be edited:\n";
+            cin >> id;
+            editRecord(Username, id);
+        }
+        else if(choice == 4){
+            completeTask(Username);
+        }
+        else if(choice == 5){
+            displayTask(Username);
+        }
+        else if(choice == 6){
+            change_pass(Username);
+        }
+        else if(choice == 7){
+            cout << "Thank You\n";
+            break;
+        }
+        else{
+            cout<<"Enter a valid choice."<<endl;
+        }    
+   }
 }
 
 int main(){
     cout << "Welcome to Task Scheduler and Reminder\n";
     sleep(1.0);
+    PriorityQueue pq;
     while(true){
         cout << "1. Sign Up\n";
         cout << "2. Login\n";
         cout << "3. Exit.\n";
         int c;
+        string username;
         cout << "Enter your choice:\n";
         cin >> c;
         if(c == 1){
-            string username;
             cout << "Enter your username:\n";
             cin >> username;
             signup(username);
             menu(username);
+            break;
         }
         else if(c == 2){
-            string username;
             cout << "Enter your username:\n";
             cin >> username;
             login(username);
+            pq.pqEntry(username);
+            pq.displayQueue(username);
             menu(username);
+            break;
         }
         else if(c == 3){
             cout << "Thank You.\n";
-            return 0;
+            break;
+        }
+        else{
+            cout << "Enter valid choice.";
         }
     }
 }
