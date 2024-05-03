@@ -27,7 +27,6 @@ class PriorityQueue{
             frontNode = nullptr;
         }
         bool isEmpty();
-        void enqueue(float p, int tid);
         void pqEntry(string username);
         void displayQueue(string username);
 };

@@ -9,7 +9,8 @@ void addTask(string username){
     string task, description, status = "Pending", Deadline;
     int Importance_Level, Duration_Days = 0, frequency = 0;
     char yn;
-    tid++;
+    cout<<"Enter Task ID: "<<endl;
+    cin>>tid;
     cout<<"Enter Task: "<<endl;
     cin>>task;
     cout<<"Add Task Description: "<<endl;
