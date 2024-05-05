@@ -41,7 +41,7 @@ void addTask(string username){
     fout.open("tasks.csv", ios::out | ios::app);
     string entry = username + ',' + to_string(t.taskID) + ',' + task + ',' + description + ',' + Deadline + ',' + to_string(Importance_Level) +
     ',' + to_string(frequency) + ',' + to_string(Duration_Days) + ',' +status + "\n";
-    fout << entry << "\n";
+    fout << entry;
     fout.close();
 }
 
